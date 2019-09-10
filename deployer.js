@@ -213,7 +213,8 @@ function () {
 
       try {
         return this.bucket.uploadFile(fullFileKey, fileStream, {
-          pwa: pwaSupportForFile
+          pwa: pwaSupportForFile,
+          gzip: gzip
         }).then(function () {
           _this.uploadCount++;
           var pwaMessage = pwaSupportForFile ? ' with cache disabled for PWA' : '';
