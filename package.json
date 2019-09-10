@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "babel-jest": "^23.6.0",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "zlib": "^1.0.5"
   }
 }
