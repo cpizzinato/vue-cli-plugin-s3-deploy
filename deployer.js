@@ -200,10 +200,9 @@ function () {
       var fileKey = filename.replace(this.config.fullAssetPath, '').replace(/\\/g, '/');
       var fullFileKey = "".concat(this.config.deployPath).concat(fileKey);
       var pwaSupportForFile = this.config.options.pwa && this.config.options.pwaFiles.split(',').indexOf(fileKey) > -1;
-
       var gzip = this.config.options.gzip && _globby["default"].sync(this.config.options.gzipFilePattern, {
         cwd: this.config.fullAssetPath
-      });
+      }).indexOf(filename) > -1;
 
       if (gzip) {
         fileStream = _zlib["default"].gzipSync(fileStream, {

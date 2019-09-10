@@ -113,7 +113,7 @@ class Deployer {
     let fileKey = filename.replace(this.config.fullAssetPath, '').replace(/\\/g, '/')
     let fullFileKey = `${this.config.deployPath}${fileKey}`
     let pwaSupportForFile = this.config.options.pwa && this.config.options.pwaFiles.split(',').indexOf(fileKey) > -1
-    let gzip = this.config.options.gzip && globby.sync(this.config.options.gzipFilePattern, { cwd: this.config.fullAssetPath })
+    let gzip = this.config.options.gzip && globby.sync(this.config.options.gzipFilePattern, { cwd: this.config.fullAssetPath }).indexOf(filename) > -1
     if (gzip) {
       fileStream = zlib.gzipSync(fileStream, { level: 9 })
     }
