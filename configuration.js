@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.VERSION = void 0;
 
-var _snakecase = _interopRequireDefault(require("lodash/snakecase"));
+var _lodash = require("lodash");
 
 var _joi = _interopRequireDefault(require("joi"));
 
@@ -42,29 +42,29 @@ function () {
       pluginVersion: _joi["default"].string().valid(VERSION).error(function (err) {
         return "\n          Configuration is out of date.\n          Config: ".concat(err[0].context.value, " Plugin: ").concat(VERSION, "\n          Run 'vue invoke s3-deploy'\n        ");
       }).required(),
-      awsProfile: _joi["default"].string()["default"]('default'),
-      overrideEndpoint: _joi["default"]["boolean"]()["default"](false),
-      endpoint: _joi["default"].string(),
-      region: _joi["default"].string().regex(/^[-0-9a-zA-Z]+$/)["default"]('us-east-1'),
-      bucket: _joi["default"].string().required(),
-      createBucket: _joi["default"]["boolean"]()["default"](false),
-      uploadConcurrency: _joi["default"].number().min(1)["default"](5),
-      staticHosting: _joi["default"]["boolean"]()["default"](false),
-      staticIndexPage: _joi["default"].string()["default"]('index.html'),
-      staticErrorPage: _joi["default"].string()["default"]('index.html'),
-      staticWebsiteConfiguration: _joi["default"].object(),
-      assetPath: _joi["default"].string()["default"]('dist'),
-      assetMatch: _joi["default"].string()["default"]('**'),
-      deployPath: _joi["default"].string()["default"]('/'),
-      acl: _joi["default"].string()["default"]('public-read'),
-      pwa: _joi["default"]["boolean"]()["default"](false),
-      pwaFiles: _joi["default"].string()["default"]('index.html,service-worker.js,manifest.json'),
-      enableCloudfront: _joi["default"]["boolean"]()["default"](false),
-      cloudfrontId: _joi["default"].string(),
-      cloudfrontMatchers: _joi["default"].string()["default"]('/index.html,/service-worker.js,/manifest.json'),
-      registry: _joi["default"].any(),
-      gzip: _joi["default"]["boolean"]()["default"](false),
-      gzipFilePattern: _joi["default"].string()["default"]('**/*.{js,css,json,ico,map,xml,txt,svg,eot,ttf,woff,woff2}'),
+      awsProfile: _joi.default.string().default('default'),
+      overrideEndpoint: _joi.default.boolean().default(false),
+      endpoint: _joi.default.string(),
+      region: _joi.default.string().regex(/^[-0-9a-zA-Z]+$/).default('us-east-1'),
+      bucket: _joi.default.string().required(),
+      createBucket: _joi.default.boolean().default(false),
+      uploadConcurrency: _joi.default.number().min(1).default(5),
+      staticHosting: _joi.default.boolean().default(false),
+      staticIndexPage: _joi.default.string().default('index.html'),
+      staticErrorPage: _joi.default.string().default('index.html'),
+      staticWebsiteConfiguration: _joi.default.object(),
+      assetPath: _joi.default.string().default('dist'),
+      assetMatch: _joi.default.string().default('**'),
+      deployPath: _joi.default.string().default('/'),
+      acl: _joi.default.string().default('public-read'),
+      pwa: _joi.default.boolean().default(false),
+      pwaFiles: _joi.default.string().default('index.html,service-worker.js,manifest.json'),
+      enableCloudfront: _joi.default.boolean().default(false),
+      cloudfrontId: _joi.default.string(),
+      cloudfrontMatchers: _joi.default.string().default('/index.html,/service-worker.js,/manifest.json'),
+      registry: _joi.default.any(),
+      gzip: _joi.default.boolean().default(false),
+      gzipFilePattern: _joi.default.string().default('**/*.{js,css,json,ico,map,xml,txt,svg,eot,ttf,woff,woff2}'),
       cacheControl: _joi["default"].string()["default"]('max-age=86400')
     };
 
@@ -89,7 +89,7 @@ function () {
       var optionsCopy = _objectSpread({}, options);
 
       optionNames.forEach(function (name) {
-        var envVar = "".concat(_this.prefix, "_").concat((0, _snakecase["default"])(name).toUpperCase());
+        var envVar = "".concat(_this.prefix, "_").concat((0, _lodash.snakeCase)(name).toUpperCase());
         optionsCopy[name] = process.env[envVar] || optionsCopy[name];
       });
       return optionsCopy;

@@ -210,6 +210,16 @@ function () {
         });
       }
 
+      var gzip = this.config.options.gzip && _globby.default.sync(this.config.options.gzipFilePattern, {
+        cwd: this.config.fullAssetPath
+      });
+
+      if (gzip) {
+        fileStream = _zlib.default.gzipSync(fileStream, {
+          level: 9
+        });
+      }
+
       try {
         return this.bucket.uploadFile(fullFileKey, fileStream, {
           pwa: pwaSupportForFile,
